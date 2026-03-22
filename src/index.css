@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Dark Delivery App Theme */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 210 17% 98%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 123 46% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 17% 97%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 210 17% 97%;
+    --muted-foreground: 0 0% 46%;
+
+    --accent: 123 30% 94%;
+    --accent-foreground: 123 46% 28%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 123 46% 33%;
+
+    --radius: 0.75rem;
+
+    /* Extended palette */
+    --fresh-green: 123 46% 33%;
+    --fresh-green-light: 120 40% 94%;
+    --fresh-green-dark: 123 46% 28%;
+    --sale-red: 0 72% 55%;
+    --sale-red-light: 0 40% 95%;
+    --star-yellow: 42 100% 50%;
+    --success: 123 46% 33%;
+    --warning: 42 100% 50%;
+    --orange: 25 95% 55%;
+    --purple: 270 60% 55%;
+
+    /* Surface variants */
+    --surface-elevated: 0 0% 100%;
+    --surface-sunken: 210 17% 96%;
+
+    /* Sidebar */
+    --sidebar-background: 123 46% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 123 46% 33%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 123 30% 94%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 123 46% 33%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 123 46% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 40% 18%;
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 222 35% 20%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 123 30% 18%;
+    --accent-foreground: 123 46% 55%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 222 30% 22%;
+    --input: 222 35% 20%;
+    --ring: 123 46% 40%;
+
+    --fresh-green: 123 46% 40%;
+    --fresh-green-light: 123 30% 14%;
+    --fresh-green-dark: 123 46% 55%;
+    --sale-red: 0 72% 50%;
+    --sale-red-light: 0 40% 15%;
+    --star-yellow: 45 100% 51%;
+    --success: 123 46% 40%;
+    --warning: 45 100% 51%;
+    --orange: 25 95% 55%;
+    --purple: 270 60% 55%;
+
+    --surface-elevated: 222 47% 17%;
+    --surface-sunken: 222 47% 8%;
+
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 123 46% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 123 30% 18%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 222 30% 22%;
+    --sidebar-ring: 123 46% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl;
+  }
+
+  /* Safe area for mobile */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Smooth shadow transitions */
+  .shadow-smooth {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  /* Interactive hover lift */
+  .hover-lift {
+    @apply transition-all duration-200;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-0.5;
+  }
+
+  /* Focus ring for accessibility */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent-foreground;
+  }
+}
+
+@layer components {
+  /* Refined input styles */
+  .input-modern {
+    @apply h-12 px-4 rounded-2xl bg-secondary border-0 text-foreground placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-0 transition-all;
+  }
+
+  /* Badge variants */
+  .badge-discount {
+    @apply bg-sale text-white font-semibold text-xs px-2 py-1 rounded-lg;
+  }
+
+  .badge-new {
+    @apply bg-primary text-primary-foreground font-semibold text-xs px-2 py-1 rounded-lg;
+  }
+
+  /* Card glass effect */
+  .card-glass {
+    @apply bg-card/50 backdrop-blur-lg border border-border/50 rounded-2xl;
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-green {
+    background: linear-gradient(135deg, hsl(130, 95%, 50%) 0%, hsl(130, 95%, 40%) 100%);
+  }
+
+  .bg-gradient-orange {
+    background: linear-gradient(135deg, hsl(25, 95%, 55%) 0%, hsl(25, 95%, 45%) 100%);
+  }
+
+  .bg-gradient-purple {
+    background: linear-gradient(135deg, hsl(270, 60%, 55%) 0%, hsl(270, 60%, 45%) 100%);
+  }
+}
+
+/* Pulse ring animation for active tracking dots */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(13, 242, 51, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(13, 242, 51, 0);
+  }
+  100% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 rgba(13, 242, 51, 0);
+  }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
+}

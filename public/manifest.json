@@ -1,0 +1,35 @@
+{
+  "name": "HALLOFRESH Grocery Mart",
+  "short_name": "HALLOFRESH",
+  "description": "Fresh Groceries Delivered - Shop fresh groceries at HALLOFRESH Grocery Mart",
+  "start_url": "/store",
+  "display": "standalone",
+  "background_color": "#1a1f2e",
+  "theme_color": "#22C55E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

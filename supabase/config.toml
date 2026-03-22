@@ -1,0 +1,10 @@
+project_id = "vtovulunjmvonqizhwrm"
+
+[functions.staff-password-reset]
+verify_jwt = false
+
+[functions.send-promo-notifications]
+verify_jwt = false
+
+[functions.generate-product-image]
+verify_jwt = false

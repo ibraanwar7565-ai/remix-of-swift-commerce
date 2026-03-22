@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"C:\\\\Users\\\\user\\\\Downloads\\\\remix-of-swift-commerce-main\\\\remix-of-swift-commerce-main/src\" -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" \\\\\\) -exec wc -l {} +)",
+      "Bash(npm list:*)",
+      "Bash(npx supabase:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 root@187.124.40.104 \"echo ''SSH CONNECTION OK'' && uname -a && df -h / && free -h\")"
+    ]
+  }
+}
