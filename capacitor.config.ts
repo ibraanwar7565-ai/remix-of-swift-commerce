@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'HALLOFRESH Grocery Mart',
   webDir: 'dist',
   server: {
-    url: 'https://537417dc-90ef-4d57-9352-ec8a0e0c5504.lovableproject.com?forceHideBadge=true',
+    url: 'https://hallofreshm-art.lovable.app?forceHideBadge=true',
     cleartext: true,
   },
 };
