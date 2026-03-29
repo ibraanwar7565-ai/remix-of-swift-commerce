@@ -349,6 +349,11 @@ const Auth = () => {
                       </div>
                       <h1 className="text-3xl font-extrabold text-foreground mb-2">Verify Code</h1>
                       <p className="text-muted-foreground">We sent a 6-digit code to <span className="font-semibold text-foreground">{phone}</span></p>
+                      {/* OTP Countdown Timer */}
+                      <div className={`flex items-center justify-center gap-2 mt-3 text-sm font-mono ${otpTimer <= 60 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                        <Timer className="h-4 w-4" />
+                        <span>{otpTimer > 0 ? `Code expires in ${formatTimer(otpTimer)}` : 'Code has expired'}</span>
+                      </div>
                     </div>
                     <div className="space-y-4">
                       <div className="space-y-2">
