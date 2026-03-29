@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowLeft, Loader2, ShieldCheck, Lock, Eye, EyeOff, LogIn, Phone, Briefcase, User, Sparkles, KeyRound } from 'lucide-react';
+import { Mail, ArrowLeft, Loader2, ShieldCheck, Lock, Eye, EyeOff, LogIn, Phone, Briefcase, User, Sparkles, KeyRound, Timer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
