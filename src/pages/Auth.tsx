@@ -47,6 +47,29 @@ const Auth = () => {
     }
   }, [user, isAdmin, isRider, isInventoryManager, roleLoading, navigate, step]);
 
+  // OTP countdown timer
+  useEffect(() => {
+    if (step === 'phone-otp' || step === 'forgot-otp') {
+      setOtpTimer(300); // 5 minutes in seconds
+    } else {
+      setOtpTimer(0);
+    }
+  }, [step]);
+
+  useEffect(() => {
+    if (otpTimer <= 0) return;
+    const interval = setInterval(() => {
+      setOtpTimer((prev) => (prev <= 1 ? 0 : prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [otpTimer]);
+
+  const formatTimer = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  };
+
   const formatPhone = (input: string) => {
     const digits = input.replace(/\D/g, '');
     if (digits.startsWith('254')) return `+${digits}`;
