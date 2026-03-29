@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowLeft, Loader2, ShieldCheck, Lock, Eye, EyeOff, LogIn, Phone, Briefcase, User, Sparkles, KeyRound } from 'lucide-react';
+import { Mail, ArrowLeft, Loader2, ShieldCheck, Lock, Eye, EyeOff, LogIn, Phone, Briefcase, User, Sparkles, KeyRound, Timer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,6 +30,7 @@ const Auth = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [maskedPhone, setMaskedPhone] = useState('');
   const [resetPhone, setResetPhone] = useState('');
+  const [otpTimer, setOtpTimer] = useState(0);
 
   const { user, sendPhoneOtp, verifyPhoneOtp, signInWithPassword, updateProfile } = useAuth();
   const { isAdmin, isRider, roles, isLoading: roleLoading } = useUserRole();
@@ -45,6 +46,29 @@ const Auth = () => {
       else navigate('/store');
     }
   }, [user, isAdmin, isRider, isInventoryManager, roleLoading, navigate, step]);
+
+  // OTP countdown timer
+  useEffect(() => {
+    if (step === 'phone-otp' || step === 'forgot-otp') {
+      setOtpTimer(300); // 5 minutes in seconds
+    } else {
+      setOtpTimer(0);
+    }
+  }, [step]);
+
+  useEffect(() => {
+    if (otpTimer <= 0) return;
+    const interval = setInterval(() => {
+      setOtpTimer((prev) => (prev <= 1 ? 0 : prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [otpTimer]);
+
+  const formatTimer = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  };
 
   const formatPhone = (input: string) => {
     const digits = input.replace(/\D/g, '');
@@ -325,6 +349,11 @@ const Auth = () => {
                       </div>
                       <h1 className="text-3xl font-extrabold text-foreground mb-2">Verify Code</h1>
                       <p className="text-muted-foreground">We sent a 6-digit code to <span className="font-semibold text-foreground">{phone}</span></p>
+                      {/* OTP Countdown Timer */}
+                      <div className={`flex items-center justify-center gap-2 mt-3 text-sm font-mono ${otpTimer <= 60 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                        <Timer className="h-4 w-4" />
+                        <span>{otpTimer > 0 ? `Code expires in ${formatTimer(otpTimer)}` : 'Code has expired'}</span>
+                      </div>
                     </div>
                     <div className="space-y-4">
                       <div className="space-y-2">
