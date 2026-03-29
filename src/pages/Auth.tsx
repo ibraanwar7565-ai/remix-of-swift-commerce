@@ -30,6 +30,7 @@ const Auth = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [maskedPhone, setMaskedPhone] = useState('');
   const [resetPhone, setResetPhone] = useState('');
+  const [otpTimer, setOtpTimer] = useState(0);
 
   const { user, sendPhoneOtp, verifyPhoneOtp, signInWithPassword, updateProfile } = useAuth();
   const { isAdmin, isRider, roles, isLoading: roleLoading } = useUserRole();
