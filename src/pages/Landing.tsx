@@ -345,6 +345,21 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ─── Staff Login ─── */}
+      <section className={`px-6 md:px-16 py-16 ${isDark ? 'bg-background' : 'bg-white'} transition-colors duration-500`}>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="max-w-md mx-auto text-center">
+          <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <Briefcase className="h-7 w-7 text-primary" />
+          </div>
+          <h3 className="text-xl font-bold mb-2">Staff Portal</h3>
+          <p className={`${textMuted} text-sm mb-6`}>For HALLOFRESH team members, administrators, and delivery riders only.</p>
+          <Button variant="outline" className="rounded-2xl h-12 px-8 font-semibold gap-2" onClick={() => navigate('/staff-login')}>
+            <Lock className="h-4 w-4" /> Staff Login
+          </Button>
+        </motion.div>
+      </section>
+
       {/* ─── Testimonials ─── */}
       <TestimonialsSection isDark={isDark} textMuted={textMuted} textSecondary={textSecondary} cardBg={cardBg} cardBorder={cardBorder} />
 
