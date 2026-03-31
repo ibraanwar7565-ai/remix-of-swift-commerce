@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 import logo from '@/assets/logo.png';
 import heroSlide1 from '@/assets/hero-slide-1.jpg';
 
-type Step = 'auth' | 'phone-otp' | 'complete-profile' | 'staff-login' | 'forgot-password' | 'forgot-otp' | 'set-new-password';
+type Step = 'auth' | 'phone-otp' | 'complete-profile';
 
 const Auth = () => {
   const [step, setStep] = useState<Step>('auth');
