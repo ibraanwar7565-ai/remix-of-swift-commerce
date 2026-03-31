@@ -333,11 +333,6 @@ const Auth = () => {
                         Browse as Guest
                       </Button>
 
-                      <div className="text-center pt-4">
-                        <Button variant="link" className="text-muted-foreground text-xs gap-1.5" onClick={() => setStep('staff-login')}>
-                          <Briefcase className="h-3.5 w-3.5" /> Staff Login
-                        </Button>
-                      </div>
                     </div>
                   </>
 
