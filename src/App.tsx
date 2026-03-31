@@ -40,6 +40,7 @@ const AdminPromoCodes = lazy(() => import("./pages/admin/PromoCodes"));
 const AdminPromotions = lazy(() => import("./pages/admin/Promotions"));
 const RiderDashboard = lazy(() => import("./pages/rider/Dashboard"));
 const RiderChat = lazy(() => import("./pages/rider/Chat"));
+const StaffLogin = lazy(() => import("./pages/StaffLogin"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
