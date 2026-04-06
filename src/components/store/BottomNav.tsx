@@ -71,6 +71,11 @@ export function BottomNav() {
           );
         })}
       </div>
+      <div className="relative text-center py-1 border-t border-border/30">
+        <span className="text-[9px] text-muted-foreground/60 font-medium tracking-wide">
+          Developed by Nexacore
+        </span>
+      </div>
     </motion.nav>
   );
 }
