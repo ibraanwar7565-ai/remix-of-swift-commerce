@@ -142,6 +142,7 @@ const App = () => {
               <BrowserRouter>
                 <AppRoutes />
                 <AIChatbot />
+                <PWAUpdatePrompt />
               </BrowserRouter>
             </TooltipProvider>
           </AuthProvider>
