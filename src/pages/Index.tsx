@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { CartProvider } from '@/contexts/CartContext';
+import { GuestGate } from '@/components/store/GuestGate';
 import { SearchBar } from '@/components/store/SearchBar';
 import { ServiceTiles } from '@/components/store/ServiceTiles';
 import { HeroCarousel } from '@/components/store/HeroCarousel';
@@ -43,6 +44,8 @@ function ThemeToggle() {
   );
 }
 
+const GUEST_BROWSING_KEY = 'guest_browsing';
+
 const Index = () => {
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -54,6 +57,10 @@ const Index = () => {
   const [deliveryLocation, setDeliveryLocation] = useState('Eastleigh, Muratina Road');
   const [currentCity, setCurrentCity] = useState('Eastleigh');
   const [userCoords, setUserCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [isGuestBrowsing, setIsGuestBrowsing] = useState(() =>
+    sessionStorage.getItem(GUEST_BROWSING_KEY) === 'true'
+  );
+
 
 
 
@@ -201,6 +208,16 @@ const Index = () => {
       }
     }
   };
+
+  // Show gate if not logged in and hasn't chosen to browse
+  if (!user && !isGuestBrowsing) {
+    return (
+      <GuestGate onBrowse={() => {
+        sessionStorage.setItem(GUEST_BROWSING_KEY, 'true');
+        setIsGuestBrowsing(true);
+      }} />
+    );
+  }
 
   return (
     <CartProvider>
