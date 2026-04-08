@@ -1,6 +1,7 @@
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { LazyImage } from '@/components/ui/lazy-image';
 import { CartItem } from '@/types/store';
 
 interface CartItemRowProps {
@@ -25,10 +26,10 @@ export function CartItemRow({ item, index, onRemove, onUpdateQuantity }: CartIte
       {/* Product Image */}
       <div className="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-muted">
         {item.product.image_url ? (
-          <img
+          <LazyImage
             src={item.product.image_url}
             alt={item.product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-2xl">
