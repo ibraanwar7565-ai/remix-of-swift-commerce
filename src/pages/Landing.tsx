@@ -104,9 +104,9 @@ export default function Landing() {
     : 'bg-gradient-to-r from-[hsl(140,20%,97%)] via-[hsl(140,20%,97%)]/90 to-[hsl(140,20%,97%)]/60';
 
   return (
-    <div className={`min-h-screen ${bg} ${textPrimary} overflow-x-hidden transition-colors duration-500`}>
+    <div className={`min-h-screen ${bg} ${textPrimary} overflow-x-hidden`}>
       {/* ─── Navbar ─── */}
-      <nav className={`flex items-center justify-between px-6 md:px-16 py-3 border-b ${navBorder} sticky top-0 z-50 ${navBg} backdrop-blur-md transition-colors duration-500`}>
+      <nav className={`flex items-center justify-between px-6 md:px-16 py-3 border-b ${navBorder} sticky top-0 z-50 ${navBg}`}>
         <div className="flex items-center gap-2">
           <img src={logo} alt="HALLOFRESH" className="h-10 w-10 object-contain" />
           <span className="font-extrabold text-lg tracking-tight hidden sm:inline">HALLO FRESH GROUP</span>
@@ -304,14 +304,12 @@ export default function Landing() {
                   <Button className="rounded-full text-sm px-6" size="sm" onClick={() => navigate('/auth')}>Order Now</Button>
                 </div>
               </div>
-              <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
+              <div className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
                 🔔 Order delivered!
-              </motion.div>
-              <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-2 -left-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
+              </div>
+              <div className="absolute -bottom-2 -left-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
                 🥬 50% off veggies
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>

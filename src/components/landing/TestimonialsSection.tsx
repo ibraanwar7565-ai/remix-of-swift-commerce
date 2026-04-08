@@ -66,12 +66,9 @@ export function TestimonialsSection({ isDark, textMuted, textSecondary, cardBg, 
       <div className="max-w-5xl mx-auto relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {visible.map((t, i) => (
-            <motion.div
+            <div
               key={`${t.idx}-${activeIndex}`}
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className={`${cardBg} border ${cardBorder} rounded-2xl p-6 transition-colors duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl group relative`}
+              className={`${cardBg} border ${cardBorder} rounded-2xl p-6 hover:border-primary/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group relative animate-fade-in`}
             >
               <Quote className={`h-8 w-8 ${isDark ? 'text-primary/15' : 'text-primary/10'} absolute top-4 right-4`} />
 
@@ -92,7 +89,7 @@ export function TestimonialsSection({ isDark, textMuted, textSecondary, cardBg, 
               </div>
 
               <p className={`text-sm ${textSecondary} leading-relaxed`}>"{t.quote}"</p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
