@@ -50,8 +50,9 @@ export function ServiceTiles({ onCategorySelect, selectedCategory }: ServiceTile
             <motion.button
               key={cat}
               initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06, type: 'tween', duration: 0.3 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onCategorySelect?.(isActive ? null : cat)}
               className="flex flex-col items-center gap-2 min-w-[80px]"

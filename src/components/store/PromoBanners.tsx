@@ -72,8 +72,9 @@ export function PromoBanners() {
           <motion.button
             key={i}
             initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.08 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.08, type: 'tween', duration: 0.3 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => navigate(promo.path)}
             className="relative min-w-[280px] h-[160px] rounded-2xl overflow-hidden snap-start shrink-0 text-left"

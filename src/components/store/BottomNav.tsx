@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Home, FileText, Heart, ShoppingCart, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import React, { useContext } from 'react';
@@ -23,10 +22,7 @@ export function BottomNav() {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <motion.nav
-      initial={{ y: 100 }}
-      animate={{ y: 0 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+    <nav
       className="fixed bottom-0 left-0 right-0 z-50 safe-area-bottom"
     >
       <div className="absolute inset-0 bg-card/95 backdrop-blur-lg border-t border-border/50" />
@@ -38,11 +34,10 @@ export function BottomNav() {
           const isCart = item.labelKey === 'cart';
 
           return (
-            <motion.button
+            <button
               key={item.labelKey}
-              whileTap={{ scale: 0.9 }}
               onClick={() => navigate(item.path)}
-              className="relative flex flex-col items-center gap-0.5 py-1 px-2 min-w-0"
+              className="relative flex flex-col items-center gap-0.5 py-1 px-2 min-w-0 active:scale-90 transition-transform"
             >
               <div className="relative">
                 <Icon
@@ -51,13 +46,11 @@ export function BottomNav() {
                   }`}
                 />
                 {isCart && totalItems > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-2 -right-2.5 min-w-[18px] h-[18px] rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center px-1"
+                  <span
+                    className="absolute -top-2 -right-2.5 min-w-[18px] h-[18px] rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center px-1 animate-scale-in"
                   >
                     {totalItems > 99 ? '99+' : totalItems}
-                  </motion.span>
+                  </span>
                 )}
               </div>
               <span
@@ -67,7 +60,7 @@ export function BottomNav() {
               >
                 {t(item.labelKey)}
               </span>
-            </motion.button>
+            </button>
           );
         })}
       </div>
@@ -76,6 +69,6 @@ export function BottomNav() {
           Developed by Nexacore..
         </span>
       </div>
-    </motion.nav>
+    </nav>
   );
 }
