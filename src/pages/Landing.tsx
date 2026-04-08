@@ -104,9 +104,9 @@ export default function Landing() {
     : 'bg-gradient-to-r from-[hsl(140,20%,97%)] via-[hsl(140,20%,97%)]/90 to-[hsl(140,20%,97%)]/60';
 
   return (
-    <div className={`min-h-screen ${bg} ${textPrimary} overflow-x-hidden transition-colors duration-500`}>
+    <div className={`min-h-screen ${bg} ${textPrimary} overflow-x-hidden`}>
       {/* ─── Navbar ─── */}
-      <nav className={`flex items-center justify-between px-6 md:px-16 py-3 border-b ${navBorder} sticky top-0 z-50 ${navBg} backdrop-blur-md transition-colors duration-500`}>
+      <nav className={`flex items-center justify-between px-6 md:px-16 py-3 border-b ${navBorder} sticky top-0 z-50 ${navBg}`}>
         <div className="flex items-center gap-2">
           <img src={logo} alt="HALLOFRESH" className="h-10 w-10 object-contain" />
           <span className="font-extrabold text-lg tracking-tight hidden sm:inline">HALLO FRESH GROUP</span>
@@ -165,7 +165,7 @@ export default function Landing() {
         <AnimatePresence mode="wait">
           <motion.div key={currentSlide} initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.2 }} className="absolute inset-0 z-0">
             <img src={slide.image} alt="" className="w-full h-full object-cover" />
-            <div className={`absolute inset-0 ${heroOverlay} transition-colors duration-500`} />
+            <div className={`absolute inset-0 ${heroOverlay} `} />
           </motion.div>
         </AnimatePresence>
 
@@ -187,7 +187,7 @@ export default function Landing() {
               Experience the premium way to get your essentials. From gourmet meals to daily groceries, delivered in minutes.
             </motion.p>
 
-            <div className={`flex w-full max-w-lg ${inputBg} rounded-2xl p-1.5 border ${inputBorder} shadow-lg transition-colors duration-500`}>
+            <div className={`flex w-full max-w-lg ${inputBg} rounded-2xl p-1.5 border ${inputBorder} shadow-lg `}>
               <div className="flex items-center gap-2 flex-1 px-4">
                 <MapPin className="h-5 w-5 text-primary shrink-0" />
                 <input type="text" placeholder="Enter your delivery address" value={address} onChange={(e) => setAddress(e.target.value)}
@@ -249,7 +249,7 @@ export default function Landing() {
       <HowItWorksSection isDark={isDark} textMuted={textMuted} cardBg={cardBg} cardBorder={cardBorder} />
 
       {/* ─── Why Choose Us ─── */}
-      <section className={`px-6 md:px-16 py-20 ${bgAlt} transition-colors duration-500`}>
+      <section className={`px-6 md:px-16 py-20 ${bgAlt} `}>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">Why Choose HALLOFRESH?</h2>
           <p className={`${textMuted} max-w-lg mx-auto`}>More than just delivery — we're building the future of how Nairobi shops.</p>
@@ -296,7 +296,7 @@ export default function Landing() {
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex-1 flex justify-center">
             <div className="relative">
               {/* Phone mockup */}
-              <div className={`w-64 h-[520px] rounded-[3rem] border-4 ${isDark ? 'border-[hsl(150,15%,25%)]' : 'border-[hsl(140,15%,80%)]'} ${cardBg} shadow-2xl overflow-hidden transition-colors duration-500`}>
+              <div className={`w-64 h-[520px] rounded-[3rem] border-4 ${isDark ? 'border-[hsl(150,15%,25%)]' : 'border-[hsl(140,15%,80%)]'} ${cardBg} shadow-2xl overflow-hidden `}>
                 <div className="h-full w-full flex flex-col items-center justify-center p-6 text-center">
                   <img src={logo} alt="HALLOFRESH" className="h-20 w-20 object-contain mb-4" />
                   <h3 className="font-bold text-lg mb-2">HALLOFRESH</h3>
@@ -304,21 +304,19 @@ export default function Landing() {
                   <Button className="rounded-full text-sm px-6" size="sm" onClick={() => navigate('/auth')}>Order Now</Button>
                 </div>
               </div>
-              <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
+              <div className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
                 🔔 Order delivered!
-              </motion.div>
-              <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-2 -left-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
+              </div>
+              <div className="absolute -bottom-2 -left-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-xl text-xs font-bold shadow-lg">
                 🥬 50% off veggies
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* ─── Grow with HALLOFRESH ─── */}
-      <section className={`px-6 md:px-16 py-20 ${bgAlt} transition-colors duration-500`}>
+      <section className={`px-6 md:px-16 py-20 ${bgAlt} `}>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-3">Grow with HALLOFRESH</h2>
           <p className={`${textMuted} max-w-lg mx-auto`}>Join our ecosystem as a vendor or driver and scale your reach with our sophisticated logistics platform.</p>
@@ -346,7 +344,7 @@ export default function Landing() {
       </section>
 
       {/* ─── Staff Login ─── */}
-      <section className={`px-6 md:px-16 py-16 ${isDark ? 'bg-background' : 'bg-white'} transition-colors duration-500`}>
+      <section className={`px-6 md:px-16 py-16 ${isDark ? 'bg-background' : 'bg-white'} `}>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="max-w-md mx-auto text-center">
           <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
@@ -364,7 +362,7 @@ export default function Landing() {
       <TestimonialsSection isDark={isDark} textMuted={textMuted} textSecondary={textSecondary} cardBg={cardBg} cardBorder={cardBorder} />
 
       {/* ─── Footer ─── */}
-      <footer className={`${bgAlt} border-t ${navBorder} px-6 md:px-16 py-14 transition-colors duration-500`}>
+      <footer className={`${bgAlt} border-t ${navBorder} px-6 md:px-16 py-14 `}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 max-w-7xl mx-auto">
           <div>
             <div className="flex items-center gap-2 mb-4">
