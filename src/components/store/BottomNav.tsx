@@ -25,7 +25,7 @@ export function BottomNav() {
     <nav
       className="fixed bottom-0 left-0 right-0 z-50 safe-area-bottom"
     >
-      <div className="absolute inset-0 bg-card/95 backdrop-blur-lg border-t border-border/50" />
+      <div className="absolute inset-0 bg-card border-t border-border/50" />
 
       <div className="relative flex items-center justify-around pb-3 pt-2 px-2 max-w-lg mx-auto" style={{ height: 70 }}>
         {navItems.map((item) => {
