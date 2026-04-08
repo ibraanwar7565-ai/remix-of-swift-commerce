@@ -86,7 +86,7 @@ export function PromoBanners() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
             <div className="relative z-10 flex flex-col justify-end h-full p-4">
-              <span className="inline-flex self-start items-center gap-1 bg-white/20 backdrop-blur-sm text-[11px] font-bold px-2.5 py-1 rounded-full mb-2 text-white">
+              <span className="inline-flex self-start items-center gap-1 bg-white/20 text-[11px] font-bold px-2.5 py-1 rounded-full mb-2 text-white">
                 {promo.badge}
               </span>
               <h3 className="text-lg font-extrabold leading-tight mb-0.5 text-white drop-shadow-md">
