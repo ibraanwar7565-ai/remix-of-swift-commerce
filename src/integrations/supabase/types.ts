@@ -285,6 +285,47 @@ export type Database = {
         }
         Relationships: []
       }
+      notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          product_id: string | null
+          read: boolean
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          read?: boolean
+          title: string
+          type?: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          read?: boolean
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       order_items: {
         Row: {
           created_at: string
@@ -506,6 +547,38 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      price_watches: {
+        Row: {
+          created_at: string
+          id: string
+          product_id: string
+          user_id: string
+          watched_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          product_id: string
+          user_id: string
+          watched_price: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          product_id?: string
+          user_id?: string
+          watched_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "price_watches_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       product_notifications: {
         Row: {
@@ -747,6 +820,8 @@ export type Database = {
       }
       promotions: {
         Row: {
+          banner_image_url: string | null
+          banner_link: string | null
           created_at: string
           end_date: string
           id: string
@@ -759,6 +834,8 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          banner_image_url?: string | null
+          banner_link?: string | null
           created_at?: string
           end_date: string
           id?: string
@@ -771,6 +848,8 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          banner_image_url?: string | null
+          banner_link?: string | null
           created_at?: string
           end_date?: string
           id?: string
