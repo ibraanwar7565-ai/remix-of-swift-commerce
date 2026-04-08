@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { LazyImage } from '@/components/ui/lazy-image';
 import { motion } from 'framer-motion';
 import { ShoppingCart } from 'lucide-react';
 import { toast } from 'sonner';
@@ -39,12 +40,10 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       <Card className="group overflow-hidden border-border/50 bg-card transition-all duration-300 hover:border-primary/30 hover:shadow-lg">
         <div className="relative aspect-square overflow-hidden bg-secondary">
           {product.image_url ? (
-            <motion.img
+            <LazyImage
               src={product.image_url}
               alt={product.name}
-              className="h-full w-full object-cover"
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.5 }}
+              className="h-full w-full"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center text-muted-foreground">

@@ -1,4 +1,5 @@
 import { useState, memo } from 'react';
+import { LazyImage } from '@/components/ui/lazy-image';
 import { useNavigate } from 'react-router-dom';
 import { Heart, Plus, Minus, Check, Bell, BellOff } from 'lucide-react';
 import { toast } from 'sonner';
@@ -56,11 +57,10 @@ export function ProductGridCard({ product, index = 0 }: ProductGridCardProps) {
       {/* Image Container */}
       <div className="relative aspect-square bg-muted/50 overflow-hidden">
         {product.image_url ? (
-          <img
+          <LazyImage
             src={product.image_url}
             alt={product.name}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-muted-foreground text-4xl">
