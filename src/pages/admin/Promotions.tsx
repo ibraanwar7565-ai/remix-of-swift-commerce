@@ -23,6 +23,8 @@ interface PromoFormData {
   is_active: boolean;
   start_date: string;
   end_date: string;
+  banner_image_url: string;
+  banner_link: string;
 }
 
 const emptyForm: PromoFormData = {
@@ -30,6 +32,8 @@ const emptyForm: PromoFormData = {
   is_active: true,
   start_date: new Date().toISOString().slice(0, 16),
   end_date: '',
+  banner_image_url: '',
+  banner_link: '/grocery',
 };
 
 export default function AdminPromotions() {
@@ -85,6 +89,8 @@ export default function AdminPromotions() {
       is_active: p.is_active,
       start_date: p.start_date?.slice(0, 16) || '',
       end_date: p.end_date?.slice(0, 16) || '',
+      banner_image_url: p.banner_image_url || '',
+      banner_link: p.banner_link || '/grocery',
     });
     setIsDialogOpen(true);
   };
@@ -102,6 +108,8 @@ export default function AdminPromotions() {
       is_active: form.is_active,
       start_date: new Date(form.start_date).toISOString(),
       end_date: new Date(form.end_date).toISOString(),
+      banner_image_url: form.banner_image_url.trim() || null,
+      banner_link: form.banner_link.trim() || '/grocery',
     };
 
     let error;
@@ -235,6 +243,15 @@ export default function AdminPromotions() {
             <div className="flex items-center gap-3">
               <Switch checked={form.is_active} onCheckedChange={v => setForm(f => ({ ...f, is_active: v }))} />
               <Label>Active immediately</Label>
+            </div>
+            <div>
+              <Label>Banner Image URL (optional)</Label>
+              <Input value={form.banner_image_url} onChange={e => setForm(f => ({ ...f, banner_image_url: e.target.value }))} placeholder="https://... (image for store banner)" className="mt-1" />
+              <p className="text-xs text-muted-foreground mt-1">If set, this promo will appear as a banner in the store</p>
+            </div>
+            <div>
+              <Label>Banner Link</Label>
+              <Input value={form.banner_link} onChange={e => setForm(f => ({ ...f, banner_link: e.target.value }))} placeholder="/grocery" className="mt-1" />
             </div>
             <Button onClick={handleSave} disabled={saving} className="w-full rounded-xl">
               {saving ? 'Saving...' : editingId ? 'Update Promotion' : 'Create Promotion'}
