@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { useEffect, useRef } from 'react';
 import { ThemeToggle } from './ThemeToggle';
+import { NotificationBell } from './NotificationBell';
 
 interface HeaderProps {
   minimal?: boolean;
@@ -50,6 +51,7 @@ export function Header({ minimal, title, showBack, onBack }: HeaderProps) {
           
           <div className="flex items-center gap-1">
             <ThemeToggle />
+            <NotificationBell />
             <Button
               variant="ghost"
               size="icon"
@@ -90,6 +92,7 @@ export function Header({ minimal, title, showBack, onBack }: HeaderProps) {
 
         <div className="flex items-center gap-1">
           <ThemeToggle />
+          <NotificationBell />
           {user ? (
             <Button
               variant="ghost"
