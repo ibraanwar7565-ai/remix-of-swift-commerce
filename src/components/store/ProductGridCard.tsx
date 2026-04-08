@@ -12,6 +12,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useProductNotifications } from '@/hooks/useProductNotifications';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTranslateProduct } from '@/hooks/useTranslateProduct';
+import { usePriceWatch } from '@/hooks/usePriceWatch';
 
 interface ProductGridCardProps {
   product: Product;
@@ -24,6 +25,7 @@ export function ProductGridCard({ product, index = 0 }: ProductGridCardProps) {
   const navigate = useNavigate();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { isSubscribed, subscribe, unsubscribe } = useProductNotifications();
+  const { isWatching, toggleWatch } = usePriceWatch();
   const { t } = useLanguage();
   const { useProductName } = useTranslateProduct();
   const translatedName = useProductName(product.name);
@@ -99,20 +101,41 @@ export function ProductGridCard({ product, index = 0 }: ProductGridCardProps) {
           </div>
         )}
 
-        {/* Favorite Button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            if (user) toggleFavorite(product.id);
-          }}
-          className={`absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-sm transition-all active:scale-90 ${
-            isFavorite(product.id) 
-              ? 'bg-sale text-white shadow-sm' 
-              : 'bg-white/90 text-muted-foreground hover:text-sale hover:bg-white'
-          }`}
-        >
-          <Heart className={`h-4 w-4 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
-        </button>
+        {/* Action Buttons (top right) */}
+        <div className="absolute top-2 right-2 flex flex-col gap-1">
+          {/* Favorite Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              if (user) toggleFavorite(product.id);
+            }}
+            className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-sm transition-all active:scale-90 ${
+              isFavorite(product.id) 
+                ? 'bg-sale text-white shadow-sm' 
+                : 'bg-white/90 text-muted-foreground hover:text-sale hover:bg-white'
+            }`}
+          >
+            <Heart className={`h-4 w-4 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+          </button>
+
+          {/* Price Watch Button */}
+          {user && product.inventory_count > 0 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleWatch(product.id, product.price);
+              }}
+              className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-sm transition-all active:scale-90 ${
+                isWatching(product.id)
+                  ? 'bg-amber-500 text-white shadow-sm'
+                  : 'bg-white/90 text-muted-foreground hover:text-amber-500 hover:bg-white'
+              }`}
+              title={isWatching(product.id) ? 'Stop watching price' : 'Watch for price drops'}
+            >
+              <Bell className={`h-4 w-4 ${isWatching(product.id) ? 'fill-current' : ''}`} />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Content */}
