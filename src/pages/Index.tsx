@@ -209,6 +209,16 @@ const Index = () => {
     }
   };
 
+  // Show gate if not logged in and hasn't chosen to browse
+  if (!user && !isGuestBrowsing) {
+    return (
+      <GuestGate onBrowse={() => {
+        sessionStorage.setItem(GUEST_BROWSING_KEY, 'true');
+        setIsGuestBrowsing(true);
+      }} />
+    );
+  }
+
   return (
     <CartProvider>
       <AnimatePresence>
