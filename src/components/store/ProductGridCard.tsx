@@ -79,7 +79,7 @@ export function ProductGridCard({ product, index = 0 }: ProductGridCardProps) {
 
         {/* Out of Stock Overlay */}
         {product.inventory_count === 0 && (
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex flex-col items-center justify-center gap-2">
+          <div className="absolute inset-0 bg-background/90 flex flex-col items-center justify-center gap-2">
             <span className="text-sm font-medium text-muted-foreground">{t('outOfStock')}</span>
             {user && (
               <Button
@@ -109,7 +109,7 @@ export function ProductGridCard({ product, index = 0 }: ProductGridCardProps) {
               e.stopPropagation();
               if (user) toggleFavorite(product.id);
             }}
-            className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-sm transition-all active:scale-90 ${
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all active:scale-90 ${
               isFavorite(product.id) 
                 ? 'bg-sale text-white shadow-sm' 
                 : 'bg-white/90 text-muted-foreground hover:text-sale hover:bg-white'
@@ -125,7 +125,7 @@ export function ProductGridCard({ product, index = 0 }: ProductGridCardProps) {
                 e.stopPropagation();
                 toggleWatch(product.id, product.price);
               }}
-              className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-sm transition-all active:scale-90 ${
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all active:scale-90 ${
                 isWatching(product.id)
                   ? 'bg-amber-500 text-white shadow-sm'
                   : 'bg-white/90 text-muted-foreground hover:text-amber-500 hover:bg-white'

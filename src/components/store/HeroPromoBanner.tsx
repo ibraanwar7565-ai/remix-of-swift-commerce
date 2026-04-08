@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -8,11 +7,7 @@ interface HeroPromoBannerProps {
 
 export function HeroPromoBanner({ onShopNow }: HeroPromoBannerProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mx-4"
-    >
+    <div className="mx-4 animate-fade-in">
       <div className="relative rounded-3xl overflow-hidden h-44 bg-gradient-to-br from-primary via-primary to-primary/80">
         {/* Decorative Elements */}
         <div className="absolute inset-0">
@@ -32,44 +27,21 @@ export function HeroPromoBanner({ onShopNow }: HeroPromoBannerProps) {
         
         {/* Content */}
         <div className="relative z-10 h-full flex flex-col justify-center p-6">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center gap-1.5 mb-3"
-          >
-            <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+          <div className="flex items-center gap-1.5 mb-3">
+            <span className="inline-flex items-center gap-1 bg-white/20 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
               <Sparkles className="h-3 w-3" />
               Weekend Special
             </span>
-          </motion.div>
+          </div>
           
-          {/* Title */}
-          <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-2xl font-bold text-white leading-tight mb-1"
-          >
+          <h2 className="text-2xl font-bold text-white leading-tight mb-1">
             Fresh Organic
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-white/80 text-sm mb-4"
-          >
+          </h2>
+          <p className="text-white/80 text-sm mb-4">
             Get 20% off leafy greens
-          </motion.p>
+          </p>
           
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            whileTap={{ scale: 0.98 }}
-          >
+          <div>
             <Button
               onClick={onShopNow}
               className="bg-white text-primary hover:bg-white/90 rounded-full font-semibold h-10 px-5 shadow-lg w-fit"
@@ -77,9 +49,9 @@ export function HeroPromoBanner({ onShopNow }: HeroPromoBannerProps) {
               Shop Now
               <ArrowRight className="ml-1.5 h-4 w-4" />
             </Button>
-          </motion.div>
+          </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

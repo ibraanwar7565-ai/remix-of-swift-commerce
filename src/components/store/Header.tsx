@@ -37,7 +37,7 @@ export function Header({ minimal, title, showBack, onBack }: HeaderProps) {
 
   if (minimal) {
     return (
-      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg">
+      <header className="sticky top-0 z-40 bg-background">
         <div className="flex items-center justify-between px-4 py-3">
           {showBack ? (
             <Button variant="ghost" size="icon" onClick={onBack}>
@@ -77,7 +77,7 @@ export function Header({ minimal, title, showBack, onBack }: HeaderProps) {
     <motion.header
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border"
+      className="sticky top-0 z-40 bg-background border-b border-border"
     >
       <div className="flex items-center justify-between px-4 py-4">
         <div className="flex items-center gap-3">
