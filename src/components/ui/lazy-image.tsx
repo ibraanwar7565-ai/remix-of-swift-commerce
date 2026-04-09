@@ -57,7 +57,7 @@ export function LazyImage({
           alt={alt || ''}
           onLoad={() => setLoaded(true)}
           className={cn(
-            'w-full h-full object-cover transition-opacity duration-300',
+            'w-full h-full object-cover transition-all duration-300 active:scale-90',
             loaded ? 'opacity-100' : 'opacity-0'
           )}
           decoding="async"
