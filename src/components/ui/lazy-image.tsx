@@ -37,13 +37,14 @@ export function LazyImage({
   return (
     <div ref={imgRef} className={cn('relative overflow-hidden', className)}>
       {/* Shimmer placeholder */}
-      <div
-        className={cn(
-          'absolute inset-0 bg-muted animate-pulse transition-opacity duration-500',
-          loaded ? 'opacity-0' : 'opacity-100',
-          placeholderClass
-        )}
-      />
+      {!loaded && (
+        <div
+          className={cn(
+            'absolute inset-0 bg-muted/60',
+            placeholderClass
+          )}
+        />
+      )}
 
       {/* Actual image - only loads when in viewport */}
       {inView && src && (

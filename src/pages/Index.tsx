@@ -18,7 +18,7 @@ import { CartDrawer } from '@/components/store/CartDrawer';
 import { UserMenu } from '@/components/store/UserMenu';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { AnimatePresence } from 'framer-motion';
+
 import { toast } from 'sonner';
 import { Sun, Moon } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -221,15 +221,13 @@ const Index = () => {
 
   return (
     <CartProvider>
-      <AnimatePresence>
-        {showPermissionScreen && (
-          <LocationPermissionScreen
-            onAllow={handleLocationDetect}
-            onSkip={() => { setShowPermissionScreen(false); setIsLocationOpen(true); }}
-            isLoading={isDetectingLocation}
-          />
-        )}
-      </AnimatePresence>
+      {showPermissionScreen && (
+        <LocationPermissionScreen
+          onAllow={handleLocationDetect}
+          onSkip={() => { setShowPermissionScreen(false); setIsLocationOpen(true); }}
+          isLoading={isDetectingLocation}
+        />
+      )}
 
       <div className="min-h-screen bg-background pb-24">
         {/* Top bar: theme toggle + search + notification */}
