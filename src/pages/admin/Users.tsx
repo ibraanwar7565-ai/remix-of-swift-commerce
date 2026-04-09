@@ -46,15 +46,15 @@ export default function AdminUsers() {
   const { data: users, isLoading, refetch } = useQuery({
     queryKey: ['admin-users'],
     queryFn: async () => {
-      const [profilesRes, rolesRes] = await Promise.all([
-        supabase.from('profiles').select('id, user_id, full_name, phone, created_at'),
-        supabase.from('user_roles').select('user_id, role, branch_id'),
-      ]);
-
-      if (profilesRes.error) throw profilesRes.error;
+      const rolesRes = await supabase.from('user_roles').select('user_id, role, branch_id');
       if (rolesRes.error) throw rolesRes.error;
+      if (!rolesRes.data?.length) return [] as UserWithRole[];
 
-      const roleMap = new Map(rolesRes.data?.map(r => [r.user_id, { role: r.role, branch_id: r.branch_id }]) || []);
+      const roleMap = new Map(rolesRes.data.map(r => [r.user_id, { role: r.role, branch_id: r.branch_id }]));
+      const userIds = rolesRes.data.map(r => r.user_id);
+
+      const profilesRes = await supabase.from('profiles').select('id, user_id, full_name, phone, created_at').in('user_id', userIds);
+      if (profilesRes.error) throw profilesRes.error;
 
       return (profilesRes.data || []).map(profile => {
         const roleInfo = roleMap.get(profile.user_id);
@@ -67,7 +67,7 @@ export default function AdminUsers() {
           branch_id: roleInfo?.branch_id || null,
           created_at: profile.created_at,
         };
-      }) as UserWithRole[];
+      }).filter(u => u.role !== 'customer') as UserWithRole[];
     },
     staleTime: 1000 * 60,
   });
