@@ -84,12 +84,21 @@ export default function AdminUsers() {
       // Also remove from riders table if they were a rider
       await supabase.from('riders').delete().eq('user_id', userId);
     },
+    onMutate: async (userId: string) => {
+      await queryClient.cancelQueries({ queryKey: ['admin-users'] });
+      const previous = queryClient.getQueryData<UserWithRole[]>(['admin-users']);
+      queryClient.setQueryData<UserWithRole[]>(['admin-users'], old => old?.filter(u => u.id !== userId));
+      return { previous };
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin-users'] });
       toast.success('Team member removed successfully');
     },
-    onError: (err: any) => {
+    onError: (err: any, _userId, context: any) => {
+      if (context?.previous) queryClient.setQueryData(['admin-users'], context.previous);
       toast.error(`Failed to remove: ${err?.message || 'Unknown error'}`);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-users'] });
     },
   });
 
