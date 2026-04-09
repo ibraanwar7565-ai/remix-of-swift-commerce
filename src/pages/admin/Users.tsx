@@ -100,9 +100,6 @@ export default function AdminUsers() {
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-users'] });
     },
-    onError: (err: any) => {
-      toast.error(`Failed to remove: ${err?.message || 'Unknown error'}`);
-    },
   });
 
   const filteredUsers = useMemo(() => users?.filter(user => {
