@@ -45,10 +45,12 @@ export function LazyImage({
       {!loaded && (
         <div
           className={cn(
-            'absolute inset-0 bg-muted/40',
+            'absolute inset-0 bg-muted/40 flex items-center justify-center',
             placeholderClass
           )}
-        />
+        >
+          <div className="w-6 h-6 rounded-full border-2 border-muted-foreground/20 border-t-primary/50 animate-spin" />
+        </div>
       )}
 
       {imgSrc && (
