@@ -152,9 +152,9 @@
     display: none;
   }
 
-  /* Glassmorphism effect */
+  /* Glassmorphism effect — no backdrop-blur to prevent flickering */
   .glass {
-    @apply bg-card/80 backdrop-blur-xl;
+    @apply bg-card/95;
   }
 
   /* Safe area for mobile */
@@ -206,9 +206,9 @@
     @apply bg-primary text-primary-foreground font-semibold text-xs px-2 py-1 rounded-lg;
   }
 
-  /* Card glass effect */
+  /* Card glass effect — no backdrop-blur to prevent flickering */
   .card-glass {
-    @apply bg-card/50 backdrop-blur-lg border border-border/50 rounded-2xl;
+    @apply bg-card/95 border border-border/50 rounded-2xl;
   }
 
   /* Gradient backgrounds */
