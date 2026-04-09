@@ -1,15 +1,17 @@
 import { useState, useMemo } from 'react';
-import { Plus, Search, UserPlus, Bike, ShieldCheck, Package, Headphones, User, ArrowLeft, Store } from 'lucide-react';
+import { Plus, Search, UserPlus, Bike, ShieldCheck, Package, Headphones, User, ArrowLeft, Store, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { AdminBottomNav } from '@/components/admin/AdminBottomNav';
 import { CreateUserDialog } from '@/components/admin/CreateUserDialog';
 import { useBranches } from '@/hooks/useBranches';
+import { toast } from 'sonner';
 
 type AppRole = 'admin' | 'order_manager' | 'inventory_manager' | 'support' | 'rider' | 'customer';
 
@@ -34,6 +36,7 @@ const roleConfig: Record<AppRole, { icon: typeof User; label: string; color: str
 
 export default function AdminUsers() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterRole, setFilterRole] = useState<AppRole | 'all'>('all');
@@ -67,6 +70,27 @@ export default function AdminUsers() {
       }) as UserWithRole[];
     },
     staleTime: 1000 * 60,
+  });
+
+  const removeTeamMember = useMutation({
+    mutationFn: async (userId: string) => {
+      // Remove user role (reverts them to customer)
+      const { error } = await supabase
+        .from('user_roles')
+        .delete()
+        .eq('user_id', userId);
+      if (error) throw error;
+
+      // Also remove from riders table if they were a rider
+      await supabase.from('riders').delete().eq('user_id', userId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-users'] });
+      toast.success('Team member removed successfully');
+    },
+    onError: (err: any) => {
+      toast.error(`Failed to remove: ${err?.message || 'Unknown error'}`);
+    },
   });
 
   const filteredUsers = useMemo(() => users?.filter(user => {
@@ -171,16 +195,44 @@ export default function AdminUsers() {
                       <Icon className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div className="flex-1 min-w-0">
-                    <p className="font-semibold truncate">{user.full_name || 'Unnamed User'}</p>
+                      <p className="font-semibold truncate">{user.full_name || 'Unnamed User'}</p>
                       <p className="text-sm text-muted-foreground">{user.phone || 'No phone'}</p>
                     </div>
-                    <div className="flex flex-col items-end gap-1">
-                      <Badge className={config.color}>{config.label}</Badge>
-                      {user.branch_id && branchMap.get(user.branch_id) && (
-                        <Badge variant="outline" className="text-[10px] gap-1">
-                          <Store className="h-3 w-3" />
-                          {branchMap.get(user.branch_id)}
-                        </Badge>
+                    <div className="flex items-center gap-2">
+                      <div className="flex flex-col items-end gap-1">
+                        <Badge className={config.color}>{config.label}</Badge>
+                        {user.branch_id && branchMap.get(user.branch_id) && (
+                          <Badge variant="outline" className="text-[10px] gap-1">
+                            <Store className="h-3 w-3" />
+                            {branchMap.get(user.branch_id)}
+                          </Badge>
+                        )}
+                      </div>
+                      {user.role !== 'customer' && (
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive">
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Remove Team Member</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This will remove <strong>{user.full_name || 'this user'}</strong> from the team and revoke their <strong>{config.label}</strong> role. They will become a regular customer. This action cannot be undone.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                onClick={() => removeTeamMember.mutate(user.id)}
+                              >
+                                Remove
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       )}
                     </div>
                   </div>

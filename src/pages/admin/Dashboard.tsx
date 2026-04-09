@@ -50,7 +50,7 @@ export default function AdminDashboard() {
         if (isBranchAdmin && branchId && (payload.new as any)?.branch_id !== branchId) return;
         const newStatus = (payload.new as any)?.status;
         const oldStatus = (payload.old as any)?.status;
-        if (newStatus === 'completed' && oldStatus !== 'completed') {
+        if (newStatus === 'delivered' && oldStatus !== 'delivered') {
           playNotificationSound('order');
           toast.success('💰 Payment confirmed!', { description: `KES ${Number((payload.new as any)?.total_amount || 0).toLocaleString()} received` });
         }
@@ -246,7 +246,7 @@ export default function AdminDashboard() {
     confirmed: { label: 'Confirmed', color: 'bg-emerald-100 text-emerald-700', icon: CheckCircle },
     processing: { label: 'Preparing', color: 'bg-blue-100 text-blue-700', icon: Package },
     out_for_delivery: { label: 'On the Way', color: 'bg-purple-100 text-purple-700', icon: Bike },
-    completed: { label: 'Delivered', color: 'bg-primary/10 text-primary', icon: CheckCircle },
+    delivered: { label: 'Delivered', color: 'bg-primary/10 text-primary', icon: CheckCircle },
     cancelled: { label: 'Cancelled', color: 'bg-destructive/10 text-destructive', icon: XCircle },
   };
 
