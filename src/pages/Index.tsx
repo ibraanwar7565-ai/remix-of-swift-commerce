@@ -221,15 +221,13 @@ const Index = () => {
 
   return (
     <CartProvider>
-      <AnimatePresence>
-        {showPermissionScreen && (
-          <LocationPermissionScreen
-            onAllow={handleLocationDetect}
-            onSkip={() => { setShowPermissionScreen(false); setIsLocationOpen(true); }}
-            isLoading={isDetectingLocation}
-          />
-        )}
-      </AnimatePresence>
+      {showPermissionScreen && (
+        <LocationPermissionScreen
+          onAllow={handleLocationDetect}
+          onSkip={() => { setShowPermissionScreen(false); setIsLocationOpen(true); }}
+          isLoading={isDetectingLocation}
+        />
+      )}
 
       <div className="min-h-screen bg-background pb-24">
         {/* Top bar: theme toggle + search + notification */}
