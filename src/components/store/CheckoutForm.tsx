@@ -16,8 +16,9 @@ import { usePromoCode } from '@/hooks/usePromoCode';
 
 type PaymentStatus = 'idle' | 'processing' | 'waiting' | 'success' | 'failed';
 
-function PaymentStatusScreen({ status, message, onClose, onRetry, countdown }: {
+function PaymentStatusScreen({ status, message, onClose, onRetry, countdown, isCash }: {
   status: 'waiting' | 'success' | 'failed';
+  isCash?: boolean;
   message: string;
   onClose: () => void;
   onRetry?: () => void;
