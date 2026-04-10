@@ -29,12 +29,10 @@ const Auth = () => {
 
   useEffect(() => {
     if (user && !roleLoading && step !== 'complete-profile') {
-      if (isAdmin) navigate('/admin');
-      else if (isInventoryManager) navigate('/admin/inventory');
-      else if (isRider) navigate('/rider');
-      else navigate('/store');
+      // Customer auth page always sends to /store — admin/rider should use /staff-login
+      navigate('/store');
     }
-  }, [user, isAdmin, isRider, isInventoryManager, roleLoading, navigate, step]);
+  }, [user, roleLoading, navigate, step]);
 
   // OTP countdown timer
   useEffect(() => {
