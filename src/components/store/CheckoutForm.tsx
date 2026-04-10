@@ -16,8 +16,9 @@ import { usePromoCode } from '@/hooks/usePromoCode';
 
 type PaymentStatus = 'idle' | 'processing' | 'waiting' | 'success' | 'failed';
 
-function PaymentStatusScreen({ status, message, onClose, onRetry, countdown }: {
+function PaymentStatusScreen({ status, message, onClose, onRetry, countdown, isCash }: {
   status: 'waiting' | 'success' | 'failed';
+  isCash?: boolean;
   message: string;
   onClose: () => void;
   onRetry?: () => void;
@@ -57,7 +58,7 @@ function PaymentStatusScreen({ status, message, onClose, onRetry, countdown }: {
         transition={{ delay: 0.2 }}
         className="text-xl font-bold text-foreground mb-2"
       >
-        {isWaiting ? 'Waiting for Payment...' : isSuccess ? 'Payment Successful! 🎉' : 'Payment Failed'}
+        {isWaiting ? 'Waiting for Payment...' : isSuccess ? (isCash ? 'Order Placed! 🎉' : 'Payment Successful! 🎉') : 'Payment Failed'}
       </motion.h2>
 
       <motion.p
@@ -479,6 +480,7 @@ export function CheckoutForm({ onBack }: CheckoutFormProps) {
         <PaymentStatusScreen
           status={paymentStatus as 'waiting' | 'success' | 'failed'}
           message={paymentMessage}
+          isCash={selectedPayment === 'cash'}
           countdown={paymentStatus === 'waiting' ? pollCountdown : undefined}
           onClose={() => {
             stopPolling();
