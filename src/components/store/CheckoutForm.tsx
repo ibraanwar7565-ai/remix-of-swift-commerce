@@ -58,7 +58,7 @@ function PaymentStatusScreen({ status, message, onClose, onRetry, countdown, isC
         transition={{ delay: 0.2 }}
         className="text-xl font-bold text-foreground mb-2"
       >
-        {isWaiting ? 'Waiting for Payment...' : isSuccess ? 'Payment Successful! 🎉' : 'Payment Failed'}
+        {isWaiting ? 'Waiting for Payment...' : isSuccess ? (isCash ? 'Order Placed! 🎉' : 'Payment Successful! 🎉') : 'Payment Failed'}
       </motion.h2>
 
       <motion.p
