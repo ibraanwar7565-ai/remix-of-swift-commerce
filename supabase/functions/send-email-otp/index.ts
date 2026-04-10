@@ -25,8 +25,23 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     );
 
-    // Delete old OTPs for this email
-    await supabase.from('otp_codes').delete().eq('email', email);
+    // Rate limit: max 3 OTPs per email per 10 minutes
+    const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    const { count } = await supabase
+      .from('otp_codes')
+      .select('*', { count: 'exact', head: true })
+      .eq('email', email)
+      .gte('created_at', tenMinutesAgo);
+
+    if (count && count >= 3) {
+      return new Response(JSON.stringify({ error: 'Too many requests. Please wait 10 minutes before trying again.' }), {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Delete expired OTPs for this email
+    await supabase.from('otp_codes').delete().eq('email', email).lt('expires_at', new Date().toISOString());
 
     // Generate 6-digit OTP
     const code = String(Math.floor(100000 + Math.random() * 900000));
