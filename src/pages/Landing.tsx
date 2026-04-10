@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { MapPin, ArrowRight, Star, Sun, Moon, Menu, X, Smartphone, Play, Briefcase, Lock } from 'lucide-react';
+import { MapPin, ArrowRight, Star, Sun, Moon, Menu, X, Smartphone, Play } from 'lucide-react';
 import { LiveCounterSection } from '@/components/landing/LiveCounterSection';
 import { HowItWorksSection } from '@/components/landing/HowItWorksSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
