@@ -480,6 +480,7 @@ export function CheckoutForm({ onBack }: CheckoutFormProps) {
         <PaymentStatusScreen
           status={paymentStatus as 'waiting' | 'success' | 'failed'}
           message={paymentMessage}
+          isCash={selectedPayment === 'cash'}
           countdown={paymentStatus === 'waiting' ? pollCountdown : undefined}
           onClose={() => {
             stopPolling();
