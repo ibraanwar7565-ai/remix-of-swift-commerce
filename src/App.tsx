@@ -95,7 +95,7 @@ function AppRoutes() {
         <Route path="/store" element={<Index />} />
         <Route path="/welcome" element={<Onboarding />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/staff-login" element={<StaffLogin />} />
+        <Route path="/portal-9x2k" element={<StaffLogin />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/account" element={<Account />} />
         <Route path="/about" element={<AboutUs />} />
