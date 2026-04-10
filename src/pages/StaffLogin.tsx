@@ -128,7 +128,7 @@ const StaffLogin = () => {
   }, [resetEmail, resetOtp, newPassword, confirmPassword]);
 
   const goBack = () => {
-    if (step === 'staff-login') navigate('/auth');
+    if (step === 'staff-login') navigate('/');
     else if (step === 'forgot-password') { setStep('staff-login'); setResetEmail(''); }
     else if (step === 'forgot-otp') { setStep('forgot-password'); setResetOtp(''); }
     else if (step === 'set-new-password') { setStep('forgot-otp'); setNewPassword(''); setConfirmPassword(''); }
