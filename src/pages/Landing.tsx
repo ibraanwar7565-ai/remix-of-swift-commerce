@@ -109,7 +109,7 @@ export default function Landing() {
       <nav className={`flex items-center justify-between px-6 md:px-16 py-3 border-b ${navBorder} sticky top-0 z-50 ${navBg}`}>
         <div className="flex items-center gap-2">
           <img src={logo} alt="HALLOFRESH" className="h-10 w-10 object-contain" />
-          <span className="font-extrabold text-lg tracking-tight hidden sm:inline">HALLO FRESH GROUP</span>
+          <span className="font-extrabold text-lg tracking-tight hidden sm:inline">HALLO FRESH MARKET</span>
         </div>
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((l) => (
@@ -352,8 +352,8 @@ export default function Landing() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 max-w-7xl mx-auto">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="HALLO FRESH GROUP" className="h-9 w-9 object-contain" />
-              <span className="font-extrabold text-lg">HALLO FRESH GROUP</span>
+              <img src={logo} alt="HALLO FRESH MARKET" className="h-9 w-9 object-contain" />
+              <span className="font-extrabold text-lg">HALLO FRESH MARKET</span>
             </div>
             <p className={`text-sm ${textMuted} leading-relaxed mb-4`}>
               Elevating daily living through premium delivery services. We connect you with the best of your city.
@@ -407,7 +407,7 @@ export default function Landing() {
           </div>
         </div>
         <div className={`border-t ${navBorder} pt-6 flex flex-col md:flex-row items-center justify-between text-xs ${textMuted} max-w-7xl mx-auto`}>
-          <p>© 2026 HALLOFRESH Grocery Inc. All rights reserved.</p>
+          <p>© 2026 HALLO FRESH MARKET. All rights reserved.</p>
           <div className="flex gap-4 mt-3 md:mt-0">
             <span>English (US)</span>
             <span>KES (KSh)</span>

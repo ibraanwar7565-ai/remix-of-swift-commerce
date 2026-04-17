@@ -1,7 +1,7 @@
 {
-  "name": "HALLOFRESH Grocery Mart",
+  "name": "HALLO FRESH MARKET",
   "short_name": "HALLOFRESH",
-  "description": "Fresh Groceries Delivered - Shop fresh groceries at HALLOFRESH Grocery Mart",
+  "description": "Fresh Groceries Delivered - Shop fresh groceries at HALLO FRESH MARKET",
   "start_url": "/store",
   "display": "standalone",
   "background_color": "#1a1f2e",

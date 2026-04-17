@@ -61,15 +61,15 @@ export default function AboutUs() {
           <ArrowLeft className="h-6 w-6 text-primary-foreground" />
         </button>
         <h1 className="text-2xl font-extrabold text-primary-foreground">About Us</h1>
-        <p className="text-primary-foreground/70 text-sm mt-1">Learn more about HalloFresh Grocery Mart</p>
+        <p className="text-primary-foreground/70 text-sm mt-1">Learn more about HalloFresh Market</p>
       </motion.div>
 
       <div className="px-4 -mt-4 space-y-4">
         {/* 1. Welcome */}
         <SectionCard delay={0.05}>
-          <SectionTitle icon={Store} title="Welcome to HalloFresh Grocery Mart" />
+          <SectionTitle icon={Store} title="Welcome to HalloFresh Market" />
           <p className="text-muted-foreground text-sm leading-relaxed">
-            HalloFresh Grocery Mart is your trusted neighbourhood grocery delivery platform based in Eastleigh, Muratina Road, Nairobi. We bring the freshest fruits, vegetables, dairy, household essentials, and more right to your doorstep — fast, affordable, and hassle-free. Whether you're a busy professional, a parent, or simply someone who values convenience, HalloFresh is here to make grocery shopping effortless.
+            HalloFresh Market is your trusted neighbourhood grocery delivery platform based in Eastleigh, Muratina Road, Nairobi. We bring the freshest fruits, vegetables, dairy, household essentials, and more right to your doorstep — fast, affordable, and hassle-free. Whether you're a busy professional, a parent, or simply someone who values convenience, HalloFresh is here to make grocery shopping effortless.
           </p>
         </SectionCard>
 
