@@ -108,7 +108,7 @@ Deno.serve(async (req) => {
           <tr>
             <td style="padding:0 40px 32px;border-top:1px solid #1a3d2a;">
               <p style="margin:24px 0 0;color:#5a6b60;font-size:11px;line-height:1.6;text-align:center;">
-                © ${new Date().getFullYear()} HALLOFRESH Grocery Inc. All rights reserved.<br>
+                © ${new Date().getFullYear()} HALLO FRESH MARKET. All rights reserved.<br>
                 Nairobi, Kenya
               </p>
             </td>

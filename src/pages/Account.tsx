@@ -193,7 +193,7 @@ function AppSettingsSheet({ open, onOpenChange }: { open: boolean; onOpenChange:
               <div className="text-center space-y-1 py-4">
                 <p className="text-sm font-semibold text-foreground">HalloFresh</p>
                 <p className="text-xs text-muted-foreground">{t('version')} 1.0.0</p>
-                <p className="text-xs text-muted-foreground">© 2025 HalloFresh Group. All rights reserved.</p>
+                <p className="text-xs text-muted-foreground">© 2025 HalloFresh Market. All rights reserved.</p>
               </div>
             </div>
           </div>
@@ -300,7 +300,7 @@ function PrivacyPolicySheet({ open, onOpenChange }: { open: boolean; onOpenChang
                 For privacy-related inquiries, contact us at:
               </p>
               <div className="mt-2 p-3 bg-muted rounded-xl space-y-1">
-                <p className="text-foreground font-medium">HalloFresh Group</p>
+                <p className="text-foreground font-medium">HalloFresh Market</p>
                 <p className="text-muted-foreground">📧 privacy@hallofresh.co.ke</p>
                 <p className="text-muted-foreground">📞 +254 719 482 565</p>
                 <p className="text-muted-foreground">📍 Nairobi, Kenya</p>
@@ -397,7 +397,7 @@ function TermsSheet({ open, onOpenChange }: { open: boolean; onOpenChange: (v: b
             <section>
               <h3 className="font-bold text-foreground mb-2">8. Intellectual Property</h3>
               <p className="text-muted-foreground">
-                All content, trademarks, and intellectual property on the App belong to HalloFresh Group. You may not reproduce, distribute, or create derivative works without our written consent.
+                All content, trademarks, and intellectual property on the App belong to HalloFresh Market. You may not reproduce, distribute, or create derivative works without our written consent.
               </p>
             </section>
 

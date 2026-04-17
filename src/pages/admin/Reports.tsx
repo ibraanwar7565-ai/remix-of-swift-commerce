@@ -183,10 +183,10 @@ export default function AdminReports() {
         .footer { margin-top: 32px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #e5e7eb; padding-top: 12px; }
         @media print { body { padding: 12px; } }
       </style></head><body>
-        <div class="header"><h1>🥬 HalloFresh Grocery Mart</h1>
+        <div class="header"><h1>🥬 HalloFresh Market</h1>
         <p>${selectedLabel} • ${rangeLabel} • Generated: ${format(new Date(), 'MMM d, yyyy h:mm a')}</p></div>
         ${content.innerHTML}
-        <div class="footer"><p>HalloFresh Grocery Mart — Eastleigh, Nairobi | +254 719 482 565</p></div>
+        <div class="footer"><p>HalloFresh Market — Eastleigh, Nairobi | +254 719 482 565</p></div>
       </body></html>
     `);
     printWindow.document.close();
