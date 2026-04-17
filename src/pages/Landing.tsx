@@ -28,6 +28,11 @@ const heroSlides = [
 
 const services = [
   { image: serviceGrocery, title: 'Fresh Grocery', description: 'Farm-to-table produce and organic essentials picked daily for your kitchen.', cta: 'BROWSE AISLES' },
+  { image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&h=600&fit=crop', title: 'Fashion', description: 'Trendy clothing, shoes and accessories delivered to your doorstep.', cta: 'SHOP STYLE' },
+  { image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=600&fit=crop', title: 'Medicine', description: 'Pharmacy essentials and over-the-counter meds when you need them most.', cta: 'ORDER MEDS' },
+  { image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&h=600&fit=crop', title: 'Restaurant', description: 'Hot meals from your favorite local restaurants, fast and fresh.', cta: 'ORDER FOOD' },
+  { image: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=800&h=600&fit=crop', title: 'Drinks & Sodas', description: 'Coca-Cola, juices, water and energy drinks — chilled and ready.', cta: 'GRAB A DRINK' },
+  { image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&h=600&fit=crop', title: 'Electronics', description: 'Phones, chargers, accessories and gadgets at great prices.', cta: 'SHOP TECH' },
 ];
 
 const whyUs = [
