@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from 'react';
-import { Plus, Search, Edit2, Trash2, Package, ArrowLeft, ShoppingCart, AlertTriangle, Upload, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Package, ArrowLeft, ShoppingCart, AlertTriangle, Upload, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
