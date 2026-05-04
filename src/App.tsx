@@ -13,7 +13,6 @@ import Landing from "./pages/Landing";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
-import { AIChatbot } from "./components/AIChatbot";
 import { PWAUpdatePrompt } from "./components/PWAUpdatePrompt";
 import { useNewProductNotifications } from "./hooks/useNewProductNotifications";
 import { usePromotionNotifications } from "./hooks/usePromotionNotifications";
@@ -141,7 +140,6 @@ const App = () => {
               <Sonner />
               <BrowserRouter>
                 <AppRoutes />
-                <AIChatbot />
                 <PWAUpdatePrompt />
               </BrowserRouter>
             </TooltipProvider>

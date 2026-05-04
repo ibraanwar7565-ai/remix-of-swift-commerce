@@ -104,7 +104,7 @@ export default function AdminInventory() {
   const [saving, setSaving] = useState(false);
   const [bulkMode, setBulkMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [generatingImage, setGeneratingImage] = useState(false);
+  
   const [uploadingImage, setUploadingImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -185,20 +185,7 @@ export default function AdminInventory() {
     if (!form.name || !form.price) { toast({ title: 'Name and price are required', variant: 'destructive' }); return; }
     setSaving(true);
 
-    // Auto-generate image if none provided
-    let imageUrl = form.image_url || null;
-    if (!imageUrl && form.name.trim()) {
-      try {
-        const { data, error } = await supabase.functions.invoke('generate-product-image', {
-          body: { product_name: form.name },
-        });
-        if (!error && data?.image_url) {
-          imageUrl = data.image_url;
-        }
-      } catch {
-        // Silent fail - product will be saved without image
-      }
-    }
+    const imageUrl = form.image_url || null;
 
     const payload = {
       name: form.name, description: form.description || null, price: Number(form.price),
@@ -432,15 +419,8 @@ export default function AdminInventory() {
                     <Upload className="h-3.5 w-3.5" />
                     {uploadingImage ? 'Uploading...' : 'Upload'}
                   </Button>
-                  <Button type="button" variant="outline" size="sm" className="rounded-xl gap-1.5" onClick={handleGenerateImage} disabled={generatingImage || !form.name.trim()}>
-                    <Sparkles className="h-3.5 w-3.5" />
-                    {generatingImage ? 'Generating...' : 'Auto-Generate'}
-                  </Button>
                 </div>
                 <Input value={form.image_url} onChange={e => setForm(f => ({ ...f, image_url: e.target.value }))} placeholder="Or paste image URL..." className="text-xs" />
-                {!form.image_url && !editingId && (
-                  <p className="text-xs text-muted-foreground">💡 Leave empty — an image will be auto-generated from the product name</p>
-                )}
               </div>
             </div>
             <div className="flex items-center gap-3"><Switch checked={form.is_active} onCheckedChange={v => setForm(f => ({ ...f, is_active: v }))} /><Label>Active (visible to customers)</Label></div>
