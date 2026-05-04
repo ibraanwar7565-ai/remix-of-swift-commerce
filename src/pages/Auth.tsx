@@ -72,15 +72,20 @@ const Auth = () => {
       return;
     }
     setPhone(formatted);
-    setStep('phone-otp');
-    sendPhoneOtp(formatted).then(({ error }) => {
+    setIsLoading(true);
+    try {
+      const { error } = await sendPhoneOtp(formatted);
       if (error) {
         toast.error(error);
-        setStep('auth');
-      } else {
-        toast.success('Verification code sent via SMS! 📱');
+        return;
       }
-    });
+      toast.success('Verification code sent via SMS! 📱');
+      setStep('phone-otp');
+    } catch (e: any) {
+      toast.error(e?.message || 'Failed to send code');
+    } finally {
+      setIsLoading(false);
+    }
   }, [phone, sendPhoneOtp]);
 
   const handleVerifyPhoneOtp = useCallback(async () => {
