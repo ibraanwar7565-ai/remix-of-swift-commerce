@@ -207,24 +207,6 @@ export default function AdminInventory() {
     queryClient.invalidateQueries({ queryKey: ['products'] });
   };
 
-  const handleGenerateImage = async () => {
-    if (!form.name.trim()) { toast({ title: 'Enter a product name first', variant: 'destructive' }); return; }
-    setGeneratingImage(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('generate-product-image', {
-        body: { product_name: form.name },
-      });
-      if (error) throw error;
-      if (data?.image_url) {
-        setForm(f => ({ ...f, image_url: data.image_url }));
-        toast({ title: 'Image generated!' });
-      }
-    } catch (err: any) {
-      toast({ title: 'Failed to generate image', description: err.message, variant: 'destructive' });
-    } finally {
-      setGeneratingImage(false);
-    }
-  };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
