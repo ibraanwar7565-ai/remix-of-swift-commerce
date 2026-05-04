@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from 'react';
-import { Plus, Search, Edit2, Trash2, Package, ArrowLeft, ShoppingCart, AlertTriangle, Upload, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Package, ArrowLeft, ShoppingCart, AlertTriangle, Upload, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -104,7 +104,7 @@ export default function AdminInventory() {
   const [saving, setSaving] = useState(false);
   const [bulkMode, setBulkMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [generatingImage, setGeneratingImage] = useState(false);
+  
   const [uploadingImage, setUploadingImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -185,20 +185,7 @@ export default function AdminInventory() {
     if (!form.name || !form.price) { toast({ title: 'Name and price are required', variant: 'destructive' }); return; }
     setSaving(true);
 
-    // Auto-generate image if none provided
-    let imageUrl = form.image_url || null;
-    if (!imageUrl && form.name.trim()) {
-      try {
-        const { data, error } = await supabase.functions.invoke('generate-product-image', {
-          body: { product_name: form.name },
-        });
-        if (!error && data?.image_url) {
-          imageUrl = data.image_url;
-        }
-      } catch {
-        // Silent fail - product will be saved without image
-      }
-    }
+    const imageUrl = form.image_url || null;
 
     const payload = {
       name: form.name, description: form.description || null, price: Number(form.price),
@@ -220,24 +207,6 @@ export default function AdminInventory() {
     queryClient.invalidateQueries({ queryKey: ['products'] });
   };
 
-  const handleGenerateImage = async () => {
-    if (!form.name.trim()) { toast({ title: 'Enter a product name first', variant: 'destructive' }); return; }
-    setGeneratingImage(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('generate-product-image', {
-        body: { product_name: form.name },
-      });
-      if (error) throw error;
-      if (data?.image_url) {
-        setForm(f => ({ ...f, image_url: data.image_url }));
-        toast({ title: 'Image generated!' });
-      }
-    } catch (err: any) {
-      toast({ title: 'Failed to generate image', description: err.message, variant: 'destructive' });
-    } finally {
-      setGeneratingImage(false);
-    }
-  };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -432,15 +401,8 @@ export default function AdminInventory() {
                     <Upload className="h-3.5 w-3.5" />
                     {uploadingImage ? 'Uploading...' : 'Upload'}
                   </Button>
-                  <Button type="button" variant="outline" size="sm" className="rounded-xl gap-1.5" onClick={handleGenerateImage} disabled={generatingImage || !form.name.trim()}>
-                    <Sparkles className="h-3.5 w-3.5" />
-                    {generatingImage ? 'Generating...' : 'Auto-Generate'}
-                  </Button>
                 </div>
                 <Input value={form.image_url} onChange={e => setForm(f => ({ ...f, image_url: e.target.value }))} placeholder="Or paste image URL..." className="text-xs" />
-                {!form.image_url && !editingId && (
-                  <p className="text-xs text-muted-foreground">💡 Leave empty — an image will be auto-generated from the product name</p>
-                )}
               </div>
             </div>
             <div className="flex items-center gap-3"><Switch checked={form.is_active} onCheckedChange={v => setForm(f => ({ ...f, is_active: v }))} /><Label>Active (visible to customers)</Label></div>

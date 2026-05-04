@@ -11,7 +11,7 @@ import { useFavorites } from '@/hooks/useFavorites';
 import { useAuth } from '@/contexts/AuthContext';
 import { useProductNotifications } from '@/hooks/useProductNotifications';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useTranslateProduct } from '@/hooks/useTranslateProduct';
+
 import { usePriceWatch } from '@/hooks/usePriceWatch';
 
 interface ProductGridCardProps {
@@ -27,8 +27,7 @@ export function ProductGridCard({ product, index = 0 }: ProductGridCardProps) {
   const { isSubscribed, subscribe, unsubscribe } = useProductNotifications();
   const { isWatching, toggleWatch } = usePriceWatch();
   const { t } = useLanguage();
-  const { useProductName } = useTranslateProduct();
-  const translatedName = useProductName(product.name);
+  const translatedName = product.name;
   const [isAdding, setIsAdding] = useState(false);
   
   const hasDiscount = product.discount_percent && product.discount_percent > 0;
