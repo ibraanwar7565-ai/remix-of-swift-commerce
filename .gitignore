@@ -29,3 +29,8 @@ dist-ssr
 !.env.example
 supabase/functions/.env
 supabase/functions/.env.*
+
+# Android signing — never commit these
+*.keystore
+*.jks
+android/key.properties
