@@ -173,10 +173,12 @@ const Index = () => {
           setDeliveryLocation(`Near ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
           toast.info('Location detected. You can refine it manually.');
         }
+        window.clearTimeout(fallbackTimer);
         setIsDetectingLocation(false);
         setShowPermissionScreen(false);
       },
       (error) => {
+        window.clearTimeout(fallbackTimer);
         console.error('Geolocation error:', error);
         toast.error(error.code === error.PERMISSION_DENIED
           ? 'Location access denied. Please select your area manually.'
