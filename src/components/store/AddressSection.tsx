@@ -22,12 +22,12 @@ export function AddressSection({ location, onManageClick }: AddressSectionProps)
       <motion.button
         whileTap={{ scale: 0.98 }}
         onClick={onManageClick}
-        className="w-full mt-2 p-3 rounded-xl border border-primary/40 bg-primary/5 flex items-center gap-3 text-left"
+        className="w-full mt-2 p-4 rounded-xl border border-primary/40 bg-primary/5 flex items-start gap-3 text-left"
       >
-        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-        <div className="min-w-0">
-          <p className="text-sm font-semibold text-foreground">Selected</p>
-          <p className="text-sm text-muted-foreground truncate">{location}</p>
+        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-medium text-primary uppercase tracking-wide">Delivering to</p>
+          <p className="text-base font-semibold text-foreground leading-snug mt-0.5">{location}</p>
         </div>
       </motion.button>
     </section>
