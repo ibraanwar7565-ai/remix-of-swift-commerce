@@ -76,7 +76,7 @@ const Index = () => {
     }
   }, [user]);
 
-  const handleLocationDetect = useCallback(() => {
+  const handleLocationDetect = useCallback(async () => {
     if (!navigator.geolocation) {
       toast.error('Geolocation is not supported by your browser');
       setShowPermissionScreen(false);
@@ -84,7 +84,29 @@ const Index = () => {
       return;
     }
 
+    // Pre-check permission state (catches Permissions-Policy block in preview iframes)
+    try {
+      // @ts-ignore
+      const status = await navigator.permissions?.query?.({ name: 'geolocation' as PermissionName });
+      if (status?.state === 'denied') {
+        toast.error('Location is blocked. Enable it in your browser settings or pick your area manually.');
+        setShowPermissionScreen(false);
+        setIsLocationOpen(true);
+        return;
+      }
+    } catch {
+      // ignore – not all browsers support this
+    }
+
     setIsDetectingLocation(true);
+
+    // Safety net: if nothing happens within 20s, open manual picker
+    const fallbackTimer = window.setTimeout(() => {
+      setIsDetectingLocation(false);
+      setShowPermissionScreen(false);
+      setIsLocationOpen(true);
+      toast.info('Taking too long. Please select your area manually.');
+    }, 20000);
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -151,10 +173,12 @@ const Index = () => {
           setDeliveryLocation(`Near ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
           toast.info('Location detected. You can refine it manually.');
         }
+        window.clearTimeout(fallbackTimer);
         setIsDetectingLocation(false);
         setShowPermissionScreen(false);
       },
       (error) => {
+        window.clearTimeout(fallbackTimer);
         console.error('Geolocation error:', error);
         toast.error(error.code === error.PERMISSION_DENIED
           ? 'Location access denied. Please select your area manually.'
