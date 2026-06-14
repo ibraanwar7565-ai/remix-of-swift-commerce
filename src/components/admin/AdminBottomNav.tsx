@@ -1,4 +1,4 @@
-import { LayoutGrid, ShoppingCart, Package, Users, Settings, MessageCircle } from 'lucide-react';
+import { LayoutGrid, ShoppingCart, Package, Users, Settings, MessageCircle, Store } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useUserRole } from '@/hooks/useUserRole';
@@ -36,6 +36,7 @@ export function AdminBottomNav() {
 
   const navItems = [
     { icon: LayoutGrid, label: 'Analytics', path: '/admin' },
+    { icon: Store, label: 'POS', path: '/admin/pos' },
     { icon: ShoppingCart, label: 'Orders', path: '/admin/orders' },
     { icon: MessageCircle, label: 'Chat', path: '/admin/chat' },
     { icon: Package, label: 'Inventory', path: '/admin/inventory' },
@@ -57,7 +58,7 @@ export function AdminBottomNav() {
             <motion.button
               key={item.label}
               onClick={() => navigate(item.path)}
-              className="flex flex-col items-center gap-1 py-2 px-3"
+              className="flex flex-col items-center gap-1 py-2 px-2"
               whileTap={{ scale: 0.85 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

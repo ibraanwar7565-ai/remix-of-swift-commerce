@@ -34,6 +34,7 @@ const AdminSettings = lazy(() => import("./pages/admin/Settings"));
 const AdminInventory = lazy(() => import("./pages/admin/Inventory"));
 const AdminOrders = lazy(() => import("./pages/admin/Orders"));
 const AdminReports = lazy(() => import("./pages/admin/Reports"));
+const AdminPOS = lazy(() => import("./pages/admin/POS"));
 const AdminRiders = lazy(() => import("./pages/admin/Riders"));
 const AdminChat = lazy(() => import("./pages/admin/Chat"));
 const AdminPromoCodes = lazy(() => import("./pages/admin/PromoCodes"));
@@ -110,6 +111,7 @@ function AppRoutes() {
         <Route path="/admin/users" element={<AdminGuard><AdminUsers /></AdminGuard>} />
         <Route path="/admin/settings" element={<AdminGuard><AdminSettings /></AdminGuard>} />
         <Route path="/admin/orders" element={<AdminGuard><AdminOrders /></AdminGuard>} />
+        <Route path="/admin/pos" element={<AdminGuard allowRoles={['order_manager']}><AdminPOS /></AdminGuard>} />
         <Route path="/admin/inventory" element={<AdminGuard allowRoles={['inventory_manager']}><AdminInventory /></AdminGuard>} />
         <Route path="/admin/reports" element={<AdminGuard><AdminReports /></AdminGuard>} />
         <Route path="/admin/riders" element={<AdminGuard><AdminRiders /></AdminGuard>} />

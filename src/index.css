@@ -243,3 +243,32 @@
 .animate-pulse-ring {
   animation: pulse-ring 2s infinite;
 }
+
+/* POS receipt printing — hide everything except the receipt */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #pos-receipt-printable,
+  #pos-receipt-printable * {
+    visibility: visible;
+  }
+  #pos-receipt-printable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80mm;
+    margin: 0;
+    padding: 4mm;
+    color: #000;
+    background: #fff;
+    font-family: 'Courier New', ui-monospace, monospace;
+  }
+  .no-print {
+    display: none !important;
+  }
+  @page {
+    margin: 0;
+    size: 80mm auto;
+  }
+}
