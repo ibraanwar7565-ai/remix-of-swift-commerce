@@ -13,7 +13,6 @@ import Landing from "./pages/Landing";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
-import { PWAUpdatePrompt } from "./components/PWAUpdatePrompt";
 import { useNewProductNotifications } from "./hooks/useNewProductNotifications";
 import { usePromotionNotifications } from "./hooks/usePromotionNotifications";
 
@@ -140,7 +139,6 @@ const App = () => {
               <Sonner />
               <BrowserRouter>
                 <AppRoutes />
-                <PWAUpdatePrompt />
               </BrowserRouter>
             </TooltipProvider>
           </AuthProvider>
