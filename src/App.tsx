@@ -8,7 +8,10 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AdminGuard } from "@/components/admin/AdminGuard";
 import { RiderGuard } from "@/components/rider/RiderGuard";
 import { ThemeProvider } from "next-themes";
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { lazyWithRetry } from "@/lib/lazyWithRetry";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { Loader2 } from "lucide-react";
 import Landing from "./pages/Landing";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -17,29 +20,29 @@ import { useNewProductNotifications } from "./hooks/useNewProductNotifications";
 import { usePromotionNotifications } from "./hooks/usePromotionNotifications";
 
 // Lazy load non-critical routes
-const Onboarding = lazy(() => import("./pages/Onboarding"));
-const Orders = lazy(() => import("./pages/Orders"));
-const Account = lazy(() => import("./pages/Account"));
-const AboutUs = lazy(() => import("./pages/AboutUs"));
-const Chat = lazy(() => import("./pages/Chat"));
-const Favourites = lazy(() => import("./pages/Favourites"));
+const Onboarding = lazyWithRetry(() => import("./pages/Onboarding"));
+const Orders = lazyWithRetry(() => import("./pages/Orders"));
+const Account = lazyWithRetry(() => import("./pages/Account"));
+const AboutUs = lazyWithRetry(() => import("./pages/AboutUs"));
+const Chat = lazyWithRetry(() => import("./pages/Chat"));
+const Favourites = lazyWithRetry(() => import("./pages/Favourites"));
 
-const GroceryService = lazy(() => import("./pages/GroceryService"));
-const CartPage = lazy(() => import("./pages/Cart"));
-const Install = lazy(() => import("./pages/Install"));
-const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
-const AdminUsers = lazy(() => import("./pages/admin/Users"));
-const AdminSettings = lazy(() => import("./pages/admin/Settings"));
-const AdminInventory = lazy(() => import("./pages/admin/Inventory"));
-const AdminOrders = lazy(() => import("./pages/admin/Orders"));
-const AdminReports = lazy(() => import("./pages/admin/Reports"));
-const AdminRiders = lazy(() => import("./pages/admin/Riders"));
-const AdminChat = lazy(() => import("./pages/admin/Chat"));
-const AdminPromoCodes = lazy(() => import("./pages/admin/PromoCodes"));
-const AdminPromotions = lazy(() => import("./pages/admin/Promotions"));
-const RiderDashboard = lazy(() => import("./pages/rider/Dashboard"));
-const RiderChat = lazy(() => import("./pages/rider/Chat"));
-const StaffLogin = lazy(() => import("./pages/StaffLogin"));
+const GroceryService = lazyWithRetry(() => import("./pages/GroceryService"));
+const CartPage = lazyWithRetry(() => import("./pages/Cart"));
+const Install = lazyWithRetry(() => import("./pages/Install"));
+const AdminDashboard = lazyWithRetry(() => import("./pages/admin/Dashboard"));
+const AdminUsers = lazyWithRetry(() => import("./pages/admin/Users"));
+const AdminSettings = lazyWithRetry(() => import("./pages/admin/Settings"));
+const AdminInventory = lazyWithRetry(() => import("./pages/admin/Inventory"));
+const AdminOrders = lazyWithRetry(() => import("./pages/admin/Orders"));
+const AdminReports = lazyWithRetry(() => import("./pages/admin/Reports"));
+const AdminRiders = lazyWithRetry(() => import("./pages/admin/Riders"));
+const AdminChat = lazyWithRetry(() => import("./pages/admin/Chat"));
+const AdminPromoCodes = lazyWithRetry(() => import("./pages/admin/PromoCodes"));
+const AdminPromotions = lazyWithRetry(() => import("./pages/admin/Promotions"));
+const RiderDashboard = lazyWithRetry(() => import("./pages/rider/Dashboard"));
+const RiderChat = lazyWithRetry(() => import("./pages/rider/Chat"));
+const StaffLogin = lazyWithRetry(() => import("./pages/StaffLogin"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,20 +57,32 @@ const queryClient = new QueryClient({
 
 function AppRoutes() {
   const [hasSeenOnboarding, setHasSeenOnboarding] = useState<boolean>(() => {
-    return localStorage.getItem('hasSeenOnboarding') === 'true';
+    try {
+      return localStorage.getItem('hasSeenOnboarding') === 'true';
+    } catch {
+      return false;
+    }
   });
 
   // Listen for storage changes (when onboarding completes)
   useEffect(() => {
     const handleStorageChange = () => {
-      setHasSeenOnboarding(localStorage.getItem('hasSeenOnboarding') === 'true');
+      try {
+        setHasSeenOnboarding(localStorage.getItem('hasSeenOnboarding') === 'true');
+      } catch {
+        setHasSeenOnboarding(false);
+      }
     };
     
     window.addEventListener('storage', handleStorageChange);
     
     // Also check on custom event for same-tab updates
     const checkOnboarding = () => {
-      setHasSeenOnboarding(localStorage.getItem('hasSeenOnboarding') === 'true');
+      try {
+        setHasSeenOnboarding(localStorage.getItem('hasSeenOnboarding') === 'true');
+      } catch {
+        setHasSeenOnboarding(false);
+      }
     };
     window.addEventListener('onboarding-complete', checkOnboarding);
     
@@ -81,7 +96,11 @@ function AppRoutes() {
   useNewProductNotifications();
   usePromotionNotifications();
 
-  const fallback = <div className="min-h-screen bg-background" />;
+  const fallback = (
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+    </div>
+  );
 
   return (
     <Suspense fallback={fallback}>
@@ -130,6 +149,7 @@ function AppRoutes() {
 
 const App = () => {
   return (
+    <ErrorBoundary>
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <QueryClientProvider client={queryClient}>
         <LanguageProvider>
@@ -145,6 +165,7 @@ const App = () => {
         </LanguageProvider>
       </QueryClientProvider>
     </ThemeProvider>
+    </ErrorBoundary>
   );
 };
 
