@@ -57,12 +57,20 @@ export async function setupPWA() {
   try {
     const { registerSW } = await import("virtual:pwa-register");
     let reloading = false;
+
+    // Workbox skipWaiting activates the new worker immediately. Reload as soon
+    // as it takes control so the page and its hashed chunks are the same build.
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (reloading) return;
+      reloading = true;
+      window.location.reload();
+    });
+
     const updateSW = registerSW({
       immediate: true,
       onNeedRefresh() {
         if (reloading) return;
-        reloading = true;
-        updateSW(true);
+        void updateSW(true);
       },
       onRegisteredSW(_swUrl, registration) {
         if (!registration) return;
